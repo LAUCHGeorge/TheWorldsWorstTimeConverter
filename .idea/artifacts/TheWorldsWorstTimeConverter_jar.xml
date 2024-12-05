@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TheWorldsWorstTimeConverter:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/TheWorldsWorstTimeConverter_jar</output-path>
+    <root id="archive" name="TheWorldsWorstTimeConverter.jar">
+      <element id="module-output" name="TheWorldsWorstTimeConverter" />
+    </root>
+  </artifact>
+</component>
