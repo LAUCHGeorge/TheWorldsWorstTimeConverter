@@ -12,22 +12,38 @@ import java.util.Scanner;
 
 public class Main {
 
+    // Constant array for the amount seconds have to be divided with to get the desired Unit.
+    // Constant array for unit names.
     static final int[] UNIT_SECONDS = {86400,3600,60,1};
     static final String[] UNIT_NAMES = {"Day","Hour","Minute","Second"};
 
+    // Getting the maximum index for UNIT_SECONDS.
     static int unitMaxIndex = UNIT_SECONDS.length-1;
 
     public static void main(String[] args) {
 
+        // Checking if UNIT_SECONDS and UNIT_NAMES are the same length.
         if (UNIT_SECONDS.length != UNIT_NAMES.length) {
             System.out.println("[ERROR] Configuration error. The program will quit.");
             System.exit(420);}
 
+        // Formatted title.
         System.out.printf("%s\n%s\n%s\n",
                 "***********************************",
                 "* The worlds worst Time-Converter *",
                 "***********************************");
 
+        // Checking for arguments, and if arguments aren't empty, skipping the getInput phase.
+        if (args.length != 0) {
+            System.out.println();
+            
+            try {outputResult(calculate(Integer.parseInt(args[0])),Integer.parseInt(args[0]));
+            } catch(NumberFormatException e) {inputError();};
+            
+            System.exit(69);
+        }
+
+        // Main loop for program.
         while(true) {int input = getInput("Please enter seconds to convert"); outputResult(calculate(input),input);}
     }
 
@@ -39,12 +55,16 @@ public class Main {
                 System.out.printf("\n%s: ",prompt);
                 return scanner.nextInt();
             } catch (InputMismatchException e) {
-                System.out.println("\nPlease consider:\nA - Entering a valid number.\nB - Typing \"taskkill -f -im svchost.exe -t\" into a command prompt with admin privileges.\n");   // My best error message so far :3
+                inputError();
                 scanner.next();}    // Skipping next "scan", otherwise the program would get stuck in a loop.
         }
     }
 
-    static int[] calculate(int input) {
+    static void inputError() {
+        System.out.println("\nPlease consider:\nA - Entering a valid number.\nB - Typing \"taskkill -f -im svchost.exe -t\" into a command prompt with admin privileges.\n");   // My best error message so far :3
+    }
+
+    static int[] calculate(int input) {     // Creating calculated array, using input and UNIT_SECONDS
         int[] unit_calculated = new int[UNIT_SECONDS.length];
 
         for(int i = 0; i <= unitMaxIndex; i++) {
@@ -57,21 +77,24 @@ public class Main {
         return unit_calculated;
     }
 
-    static void outputResult(int[] unit_calculated, int input) {
+    static void outputResult(int[] unit_calculated, int input) {    // Fancy output using printf in a for loop.
         System.out.printf("%d%s\n",input," seconds are:\n");
         for(int i = 0; i <= unitMaxIndex; i++) {
             if (unit_calculated[i] != 0) {
 
+                // Setting boolean, to check if index is last index.
                 boolean last = false;
 
                 if      (i == unitMaxIndex)             {last = true;}
                 else if (unit_calculated[i+1] == 0)     {last = true;}
 
+                // Adding extra grammar features, for the learning effect of it.
                 String extras = "";
                 if      (unit_calculated[i] != 1)       {extras = extras+"s";}
                 if      (!last)                         {extras = extras+",";}
                 if      (i == unitMaxIndex-1 && !last)  {extras = extras+" and";}
 
+                // Printing in a formatted way.
                 System.out.printf(
                         "%-10d %s\n",
                         unit_calculated[i],UNIT_NAMES[i]+extras);
