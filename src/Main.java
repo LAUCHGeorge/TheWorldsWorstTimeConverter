@@ -12,7 +12,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    // Constant array for the amount seconds have to be divided with to get the desired Unit.
+    // Constant array for the amount that seconds have to be divided with to get the desired Unit.
     // Constant array for unit names.
     static final int[] UNIT_SECONDS = {31536000,86400,3600,60,1};
     static final String[] UNIT_NAMES = {"Year","Day","Hour","Minute","Second"};
