@@ -36,9 +36,16 @@ public class Main {
         // Checking for arguments, and if arguments aren't empty, skipping the getInput phase.
         if (args.length != 0) {
             System.out.println();
-            
-            try {outputResult(calculate(Integer.parseInt(args[0])),Integer.parseInt(args[0]));
-            } catch(NumberFormatException e) {inputError();};
+
+            if (args.length < 2 ) { // In case first argument only is being used.
+                try {outputResult(calculate(Integer.parseInt(args[0])),Integer.parseInt(args[0]));
+                } catch(NumberFormatException e) {inputError();};
+            }
+
+            if (args.length > 1) {  // In case second argument is being used.
+                try {System.out.printf("%d%s%d%s%d\n",Integer.parseInt(args[0])," seconds, divided by ",Integer.parseInt(args[1])," are:\n",Integer.parseInt(args[0])/Integer.parseInt(args[1]));
+                } catch(NumberFormatException e) {inputError();};
+            }
             
             System.exit(69);
         }
@@ -61,7 +68,7 @@ public class Main {
     }
 
     static void inputError() {
-        System.out.println("\nPlease consider:\nA - Entering a valid number.\nB - Typing \"taskkill -f -im svchost.exe -t\" into a command prompt with admin privileges.\n");   // My best error message so far :3
+        System.out.println("\nPlease consider:\nA - Entering a valid number.\nB - Entering a valid number.\nC - Entering a valid number.\n");   // My best error message so far :3
     }
 
     static int[] calculate(int input) {     // Creating calculated array, using input and UNIT_SECONDS
