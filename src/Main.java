@@ -23,7 +23,7 @@ public class Main {
     public static void main(String[] args) {
 
         // Checking if UNIT_SECONDS and UNIT_NAMES are the same length.
-        if (UNIT_SECONDS.length != UNIT_NAMES.length) {
+        if (UNIT_SECONDS.length != UNIT_NAMES.length && args.length == 0) {
             System.out.println("[ERROR] Configuration error. The program will quit.");
             System.exit(420);}
 
@@ -39,12 +39,12 @@ public class Main {
 
             if (args.length < 2 ) { // In case first argument only is being used.
                 try {outputResult(calculate(Integer.parseInt(args[0])),Integer.parseInt(args[0]));
-                } catch(NumberFormatException e) {inputError();};
+                } catch(NumberFormatException e) {inputError();}
             }
 
             if (args.length > 1) {  // In case second argument is being used.
                 try {System.out.printf("%d%s%d%s%d\n",Integer.parseInt(args[0])," seconds, divided by ",Integer.parseInt(args[1])," are:\n",Integer.parseInt(args[0])/Integer.parseInt(args[1]));
-                } catch(NumberFormatException e) {inputError();};
+                } catch(NumberFormatException e) {inputError();}
             }
             
             System.exit(69);
@@ -95,7 +95,7 @@ public class Main {
                 if      (i == unitMaxIndex)             {last = true;}
                 else if (unit_calculated[i+1] == 0)     {last = true;}
 
-                // Adding extra grammar features, for the learning effect of it.
+                // Adding extra grammar features, for the learning effect of it. (even though it looks kinda bad actually)
                 String extras = "";
                 if      (unit_calculated[i] != 1)       {extras = extras+"s";}
                 if      (!last && i != unitMaxIndex-1)                         {extras = extras+",";}
